@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { DocenteService } from './docentes/docente.service';
 import { DocentesComponent } from './docentes/docentes.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module'; 
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './header/header.component';
+import { FormComponent } from './docentes/docente/form.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DocentesComponent
+    DocentesComponent,
+    HeaderComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

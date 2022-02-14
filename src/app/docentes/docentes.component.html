@@ -57,27 +57,29 @@
     </div>
 </div> -->
 
-<h1>Docentes:</h1>
-<table class="table">
-    <thead class="table-dark">
-        <tr>
-            <th>Identificacion</th>
-            <th>Tipo Identificacion</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Genero</th>
-            <th>Correo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let docente of docentes">
-            <td>{{docente.identificacion}}</td>
-            <td>{{docente.tipoIdentificacion}}</td>
-            <td>{{docente.nombres}}</td>
-            <td>{{docente.apellidos}}</td>
-            <td>{{docente.genero}}</td>
-            <td>{{docente.correo}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class = "container">
+    <h3>Docentes:</h3>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Identificacion</th>
+                <th>Tipo Identificacion</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Genero</th>
+                <th>Correo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let docente of docentes">
+                <td>{{docente.identificacion}}</td>
+                <td>{{docente.tipoIdentificacion}}</td>
+                <td>{{docente.nombres}}</td>
+                <td>{{docente.apellidos}}</td>
+                <td>{{docente.genero}}</td>
+                <td>{{docente.correo}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
     
