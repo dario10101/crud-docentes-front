@@ -1,1 +1,52 @@
-<p>form works!</p>
+s<div class="card">
+    <br>
+    <h3>{{ titulo }}</h3>
+    <div class="card-body">    
+        <form>
+            <div class="mb-3">
+                <label for="exampleDataList" class="form-label">Tipo Identificación</label>
+                <!-- 
+                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." [(ngModel)]="docente.tipoIdentificacion">
+                <select [(ngModel)]="docente.tipoIdentificacion">
+                    <option *ngFor="let o of tiOptions">{{o.name}}</option>
+                </select> -->
+                <select name="miselect" [(ngModel)]="docente.tipoIdentificacion">
+                    <option [value]="item" *ngFor="let item of lista">{{item}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="identificacion" class="form-label">Identificación</label>
+                <div class="col-sm-4">
+                    <input type="form-control" class="form-control" id="identificacion" [(ngModel)]="docente.identificacion" name="identificacion" required>                    
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="nombres" class="form-label">Nombres</label>
+                <div class="col-sm-4">
+                    <input type="form-control" class="form-control" id="nombres" aria-describedby="emailHelp" [(ngModel)]="docente.nombres" name="nombres">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <div class="col-sm-4">
+                    <input type="form-control" class="form-control" id="apellidos" aria-describedby="emailHelp" [(ngModel)]="docente.apellidos"name="apellidos">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+            </div>
+            <!-- <button type="submit" class="btn btn-primary" role="button" (click)='crearDocente()'>Guardar Docente</button> -->
+            <button class="btn btn-primary" role="button" (click)='crearDocente()' *ngIf="!docente.identificacion else elseBlock">Crear</button>
+            <ng-template #elseBlock>
+                <button class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+            </ng-template>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+    
+    

@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 //import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { DocenteService } from './docentes/docente.service';
 import { DocentesComponent } from './docentes/docentes.component';
-import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
-import { FormComponent } from './docentes/docente/form.component'; 
+import { FormComponent } from './docentes/form.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { FormComponent } from './docentes/docente/form.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [DocenteService],
   bootstrap: [AppComponent]

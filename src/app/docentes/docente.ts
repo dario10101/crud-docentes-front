@@ -5,6 +5,5 @@ export class Docente {
     apellidos: string;
     genero: string;
     //telefono: string;
-    correo: string;
-    
+    correo: string;    
 }
