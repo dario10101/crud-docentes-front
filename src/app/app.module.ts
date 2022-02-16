@@ -11,6 +11,7 @@ import { DocentesComponent } from './docentes/docentes.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FormComponent } from './docentes/form.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormComponent } from './docentes/form.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DocenteService],
   bootstrap: [AppComponent]

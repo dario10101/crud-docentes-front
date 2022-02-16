@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Docente } from './docente';
 import { DocenteService } from './docente.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from "@angular/forms";
 import swal from 'sweetalert2';
 
 
@@ -13,21 +15,27 @@ import swal from 'sweetalert2';
 export class FormComponent implements OnInit {
 
   public docente: Docente = new Docente();
-  public titulo: string = 'Crear /Actualizar Docente';
+  public titulo: string = 'Crear / Actualizar Docente';
   private router: Router;
   private docenteService: DocenteService;
+  public errors: string[] = [];
+  
+  // public angForm: FormGroup = this.fb.group({
+  //   nombres: ["", [Validators.required, Validators.maxLength(5)]],
+  //   apellidos: ["", Validators.required]
+  // });
 
   lista:string[]=["CC","CE","TI", "NIT"];
 
-  constructor(docenteService: DocenteService, router: Router) { 
+  constructor(private fb: FormBuilder, docenteService: DocenteService, router: Router) { 
     this.docenteService = docenteService;
-    this.router = router;
+    this.router = router; 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
-  public crearDocente(): void{
+  public crearDocente(): void {
     console.log('form.component.ts createDocente');
     this.docenteService.create(this.docente).subscribe(
       respose => {
@@ -43,6 +51,17 @@ export class FormComponent implements OnInit {
         swal.fire('Docente Actualizado', `Docente <b>${docente.nombres}</p> actualizado con éxito!`, 'success');
       }
     )
+  }
+
+  submitCrearDocente() {
+    // if (this.angForm.valid) {
+    //   console.log(this.angForm.value);
+    //   this.crearDocente();
+    // } else {
+    //   alert("Error! Por favor verifique los campos");
+    // }
+    //console.log(this.ngForm);
+    this.crearDocente();
   }
 
 }
