@@ -1,196 +1,223 @@
 <div class="card">
     <br>
-    <h3>{{ titulo }}</h3>
+    <div class="card-title">
+        <h3>{{ titulo }}</h3>
+    </div>
     <div class="card-body">    
-        
         <!-- <form [formGroup]="angForm" (ngSubmit)="onSubmit()" novalidate> -->
-        <form #docenteForm="ngForm">
+            <form #docenteForm="ngForm">
             
-            <!-- Tipo Identificacion -->
-            <div class="mb-3">                
-                <label for="exampleDataList" class="form-label">Tipo Identificación</label>
-                <select name="hall" id="hall" [(ngModel)]="docente.tipoIdentificacion" value='CC'>
-                    <option [value]="item" *ngFor="let item of lista">{{item}}</option>
-                </select>
-            </div>
-            
-            <!-- Identificacion -->
-            <div class="mb-3">
-                <label for="identificacion" class="form-label">Identificación</label>
-                <div class="col-sm-4">
-                    <input type="form-control" class="form-control" id="identificacion" [(ngModel)]="docente.identificacion" name="identificacion" required>                    
-                </div>
-            </div>
-
-            <!-- Nombres -->
-            <div class="mb-3">
-                <label for="nombres" class="form-label">Nombres</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="nombres" [(ngModel)]="docente.nombres" name="nombres" required
-                        #nombres="ngModel">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    <div class="alert alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
-                        <p>Datos de nombre invalidos</p>
+                <!-- Tipo Identificacion -->
+                <div class="mb-3">            
+                    <label for="exampleDataList" class="form-label">Tipo Identificación</label>
+                    <div class="col-sm-1">
+                        <select name="tipoIdentificacion" id="tipoIdentificacion" class="form-select"
+                            [(ngModel)]="docente.tipoIdentificacion">
+                            <option [value]="item" *ngFor="let item of listaTipoIdent">{{item}}</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-
-            <!-- Apellidos -->
-            <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="apellidos" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.apellidos" name="apellidos" required>
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                
+                <!-- Identificacion -->
+                <div class="mb-3">
+                    <label for="identificacion" class="form-label">Identificacion</label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="docente.identificacion" #identificacion="ngModel" type="text" class="form-control" id="identificacion" name="identificacion" required minlength="5"
+                            [class.is-invalid]="identificacion.invalid && (identificacion.dirty || identificacion.touched)" 
+                            [class.is-valid]="identificacion.valid"
+                            placeholder="validaciones">
+                
+                        <div class="form-text text-danger" *ngIf="identificacion.invalid && (identificacion.dirty || identificacion.touched)">
+                            <p>Datos invalidos, verificar:</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- genero -->
-            <div class="mb-3">
-                <label for="genero" class="form-label">Genero</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="genero" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.genero" name="genero" required>
+    
+                <!-- Nombres -->
+                <div class="mb-3">
+                    <label for="nombres" class="form-label">Nombres</label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="docente.nombres" #nombres="ngModel" type="text" class="form-control" id="nombres" name="nombres" required minlength="5"
+                            [class.is-invalid]="nombres.invalid && (nombres.dirty || nombres.touched)" 
+                            [class.is-valid]="nombres.valid"
+                            placeholder="validaciones">
+                
+                        <div class="form-text text-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
+                            <p>Datos invalidos, verificar:</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- telefono -->
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Telefono</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.telefono" name="telefono" required>
+    
+                <!-- Apellidos -->
+                <div class="mb-3">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="docente.apellidos" #apellidos="ngModel" type="text" class="form-control" id="apellidos" name="apellidos" required minlength="5"
+                            [class.is-invalid]="apellidos.invalid && (apellidos.dirty || apellidos.touched)" 
+                            [class.is-valid]="apellidos.valid"
+                            placeholder="validaciones">
+                
+                        <div class="form-text text-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+                            <p>Datos invalidos, verificar:</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- correo -->
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="correo" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.correo" name="correo" required>
+                
+                <!-- genero -->
+                <div class="mb-3">            
+                    <label for="genero" class="form-label">Género</label>
+                    <div class="col-sm-2">
+                        <select name="genero" id="genero" class="form-select"
+                            [(ngModel)]="docente.genero">
+                            <option [value]="item" *ngFor="let item of listaGenero">{{item}}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <!-- titulo -->
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Titulo</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="titulo" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.titulo" name="titulo" required>
+    
+                <!-- telefono -->
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.telefono" name="telefono" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- abreviaturaTitulo -->
-            <div class="mb-3">
-                <label for="abreviaturaTitulo" class="form-label">Abreviatura Titulo</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="abreviaturaTitulo" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.abreviaturaTitulo" name="abreviaturaTitulo" required>
+    
+                <!-- correo -->
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="correo" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.correo" name="correo" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- universidadTitulo -->
-            <div class="mb-3">
-                <label for="universidadTitulo" class="form-label">Universidad Titulo</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="universidadTitulo" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.universidadTitulo" name="universidadTitulo" required>
+    
+                <!-- titulo -->
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Titulo</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="titulo" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.titulo" name="titulo" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- categoriaMinciencias -->
-            <div class="mb-3">
-                <label for="categoriaMinciencias" class="form-label">Categoria Minciencias</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="categoriaMinciencias" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.categoriaMinciencias" name="categoriaMinciencias" required>
+    
+                <!-- abreviaturaTitulo -->
+                <div class="mb-3">            
+                    <label for="abreviaturaTitulo" class="form-label">Abreviatura Titulo</label>
+                    <div class="col-sm-1">
+                        <select name="abreviaturaTitulo" id="abreviaturaTitulo" class="form-select"
+                            [(ngModel)]="docente.abreviaturaTitulo">
+                            <option [value]="item" *ngFor="let item of listaAbreviaturaTitulo">{{item}}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <!-- linkCvLac -->
-            <div class="mb-3">
-                <label for="linkCvLac" class="form-label">LinkCvLac</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="linkCvLac" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.linkCvLac" name="linkCvLac" required>
+    
+                <!-- universidadTitulo -->
+                <div class="mb-3">
+                    <label for="universidadTitulo" class="form-label">Universidad Titulo</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="universidadTitulo" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.universidadTitulo" name="universidadTitulo" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- facultad -->
-            <div class="mb-3">
-                <label for="facultad" class="form-label">Facultad</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="facultad" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.facultad" name="facultad" required>
+    
+                <!-- categoriaMinciencias -->
+                <div class="mb-3">
+                    <label for="categoriaMinciencias" class="form-label">Categoria Minciencias</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="categoriaMinciencias" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.categoriaMinciencias" name="categoriaMinciencias" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- deparmamento -->
-            <div class="mb-3">
-                <label for="deparmamento" class="form-label">Deparmamento</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="deparmamento" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.deparmamento" name="deparmamento" required>
+    
+                <!-- linkCvLac -->
+                <div class="mb-3">
+                    <label for="linkCvLac" class="form-label">LinkCvLac</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="linkCvLac" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.linkCvLac" name="linkCvLac" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- grupoInvestigacion -->
-            <div class="mb-3">
-                <label for="grupoInvestigacion" class="form-label">Grupo Investigacion</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="grupoInvestigacion" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.grupoInvestigacion" name="grupoInvestigacion" required>
+    
+                <!-- facultad -->
+                <div class="mb-3">
+                    <label for="facultad" class="form-label">Facultad</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="facultad" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.facultad" name="facultad" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- lineaInvestigacion -->
-            <div class="mb-3">
-                <label for="lineaInvestigacion" class="form-label">Linea Investigacion</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="lineaInvestigacion" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.lineaInvestigacion" name="lineaInvestigacion" required>
+    
+                <!-- deparmamento -->
+                <div class="mb-3">
+                    <label for="deparmamento" class="form-label">Deparmamento</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="deparmamento" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.deparmamento" name="deparmamento" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- tipoVinculacion -->
-            <div class="mb-3">
-                <label for="tipoVinculacion" class="form-label">Tipo Vinculacion</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="tipoVinculacion" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.tipoVinculacion" name="tipoVinculacion" required>
+    
+                <!-- grupoInvestigacion -->
+                <div class="mb-3">            
+                    <label for="grupoInvestigacion"  class="form-label">Grupo Investigación</label>
+                    <div class="col-sm-3">
+                        <select name="grupoInvestigacion" id="grupoInvestigacion" class="form-select"
+                            [(ngModel)]="docente.grupoInvestigacion">
+                            <option [value]="item" *ngFor="let item of listaGrupoInvestigacion">{{item}}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <!-- escalafon -->
-            <div class="mb-3">
-                <label for="escalafon" class="form-label">Escalafon</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="escalafon" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.escalafon" name="escalafon" required>
+    
+                <!-- lineaInvestigacion -->
+                <div class="mb-3">
+                    <label for="lineaInvestigacion" class="form-label">Linea Investigacion</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="lineaInvestigacion" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.lineaInvestigacion" name="lineaInvestigacion" required>
+                    </div>
                 </div>
-            </div>
-
-            <!-- observacion -->
-            <div class="mb-3">
-                <label for="observacion" class="form-label">Observacion</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="observacion" aria-describedby="emailHelp"
-                        [(ngModel)]="docente.observacion" name="observacion" required>
+    
+                <!-- tipoVinculacion -->
+                <div class="mb-3">            
+                    <label for="tipoVinculacion"  class="form-label">Tipo Vinculación</label>
+                    <div class="col-sm-3">
+                        <select name="tipoVinculacion" id="tipoVinculacion" class="form-select"
+                            [(ngModel)]="docente.tipoVinculacion">
+                            <option [value]="item" *ngFor="let item of listaTipoVinculacion">{{item}}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Boton enviar -->
-            <button type="submit" class="btn btn-primary" role="button" (click)='submitCrearDocente()'
-                [disabled]="!docenteForm.form.valid">Guardar Docente
-            </button>            
-
-
-            <!-- <button class="btn btn-primary" type="submit" role="button" (click)='submitCrearDocente()' *ngIf="!docente.identificacion else elseBlock">Crear</button>
-            <ng-template #elseBlock>
-                <button type="submit" class="btn btn-primary" role="button" (click)='update()'>Editar</button>
-            </ng-template> -->
-        </form>
+    
+                <!-- escalafon -->
+                <div class="mb-3">
+                    <label for="escalafon" class="form-label">Escalafon</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="escalafon" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.escalafon" name="escalafon" required>
+                    </div>
+                </div>
+    
+                <!-- observacion -->
+                <div class="mb-3">
+                    <label for="observacion" class="form-label">Observacion</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="observacion" aria-describedby="emailHelp"
+                            [(ngModel)]="docente.observacion" name="observacion" required>
+                    </div>
+                </div>
+    
+                <!-- Boton enviar -->
+                <button type="submit" class="btn btn-primary" role="button" (click)='submitCrearDocente()'
+                    [disabled]="!docenteForm.form.valid">Guardar Docente
+                </button>            
+    
+    
+                <!-- <button class="btn btn-primary" type="submit" role="button" (click)='submitCrearDocente()' *ngIf="!docente.identificacion else elseBlock">Crear</button>
+                <ng-template #elseBlock>
+                    <button type="submit" class="btn btn-primary" role="button" (click)='update()'>Editar</button>
+                </ng-template> -->
+            </form>
+        
     </div>
 </div>
 

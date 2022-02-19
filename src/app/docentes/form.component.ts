@@ -25,7 +25,11 @@ export class FormComponent implements OnInit {
   //   apellidos: ["", Validators.required]
   // });
 
-  lista:string[]=["CC","CE","TI", "NIT"];
+  listaTipoIdent: string[] = ["CC","CE","TI", "NIT"];
+  listaGenero: string[] = ["Masculino","Femenino","Otro"];
+  listaAbreviaturaTitulo: string[] = ["Ing","Doc","Mag"];
+  listaGrupoInvestigacion: string[] = ["Grupo Investigación 1","Grupo Investigación 2","Grupo Investigación 3"];
+  listaTipoVinculacion: string[] = ["Ocasional","Planta","Catedra"];
 
   constructor(private fb: FormBuilder, docenteService: DocenteService, router: Router) { 
     this.docenteService = docenteService;
