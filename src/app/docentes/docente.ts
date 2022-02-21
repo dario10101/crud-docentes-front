@@ -13,7 +13,7 @@ export class Docente {
     linkCvLac: string;
     facultad: string;
     deparmamento: string;
-    grupoInvestigacion: string = 'Grupo Investigación 1';
+    grupoInvestigacion: string = 'grupo inv 1';
     lineaInvestigacion: string;
     tipoVinculacion: string = 'Planta';
     escalafon: string;

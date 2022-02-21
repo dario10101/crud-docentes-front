@@ -1,3 +1,6 @@
+<ul class="alert alert-danger" *ngIf="errors.length > 0">
+    <li *ngFor="let err of errors"> {{ err }} </li>
+</ul>
 <div class="card">
     <br>
     <div class="card-title">
@@ -22,7 +25,8 @@
                 <div class="mb-3">
                     <label for="identificacion" class="form-label">Identificacion</label>
                     <div class="col-sm-4">
-                        <input [(ngModel)]="docente.identificacion" #identificacion="ngModel" type="text" class="form-control" id="identificacion" name="identificacion" required minlength="5"
+                        <input [(ngModel)]="docente.identificacion" #identificacion="ngModel" type="text" class="form-control" id="identificacion" name="identificacion" 
+                            required
                             [class.is-invalid]="identificacion.invalid && (identificacion.dirty || identificacion.touched)" 
                             [class.is-valid]="identificacion.valid"
                             placeholder="validaciones">
@@ -37,7 +41,8 @@
                 <div class="mb-3">
                     <label for="nombres" class="form-label">Nombres</label>
                     <div class="col-sm-4">
-                        <input [(ngModel)]="docente.nombres" #nombres="ngModel" type="text" class="form-control" id="nombres" name="nombres" required minlength="5"
+                        <input [(ngModel)]="docente.nombres" #nombres="ngModel" type="text" class="form-control" id="nombres" name="nombres" 
+                            required
                             [class.is-invalid]="nombres.invalid && (nombres.dirty || nombres.touched)" 
                             [class.is-valid]="nombres.valid"
                             placeholder="validaciones">
@@ -52,7 +57,8 @@
                 <div class="mb-3">
                     <label for="apellidos" class="form-label">Apellidos</label>
                     <div class="col-sm-4">
-                        <input [(ngModel)]="docente.apellidos" #apellidos="ngModel" type="text" class="form-control" id="apellidos" name="apellidos" required minlength="5"
+                        <input [(ngModel)]="docente.apellidos" #apellidos="ngModel" type="text" class="form-control" id="apellidos" name="apellidos" 
+                            required minlength="5"
                             [class.is-invalid]="apellidos.invalid && (apellidos.dirty || apellidos.touched)" 
                             [class.is-valid]="apellidos.valid"
                             placeholder="validaciones">
@@ -207,15 +213,17 @@
                 </div>
     
                 <!-- Boton enviar -->
-                <button type="submit" class="btn btn-primary" role="button" (click)='submitCrearDocente()'
+                <!-- <button type="submit" class="btn btn-primary" role="button" (click)='submitCrearDocente()'
                     [disabled]="!docenteForm.form.valid">Guardar Docente
-                </button>            
+                </button>             -->
     
     
-                <!-- <button class="btn btn-primary" type="submit" role="button" (click)='submitCrearDocente()' *ngIf="!docente.identificacion else elseBlock">Crear</button>
+                <button class="btn btn-primary" type="submit" role="button" (click)='submitCrearDocente()' 
+                    *ngIf="createDocente else elseBlock" [disabled]="!docenteForm.form.valid">Crear nuevo docente</button>
                 <ng-template #elseBlock>
-                    <button type="submit" class="btn btn-primary" role="button" (click)='update()'>Editar</button>
-                </ng-template> -->
+                    <button type="submit" class="btn btn-primary" role="button" (click)='update()' 
+                    [disabled]="!docenteForm.form.valid">Actualizar docente</button>
+                </ng-template>
             </form>
         
     </div>

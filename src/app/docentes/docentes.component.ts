@@ -25,6 +25,11 @@ export class DocentesComponent implements OnInit {
       docentes => this.docentes = docentes
     );
   } 
+
+  update(docente: Docente): void {
+    console.log('docente.component.ts Editando...');
+    console.log(docente);
+  }
   
   
   delete(docente: Docente): void {
@@ -32,7 +37,7 @@ export class DocentesComponent implements OnInit {
       title: 'Estas seguro?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: `Si,eliminar`,
+      confirmButtonText: `Si, eliminar`,
       denyButtonText: `No, cancelar`,
       }
     ).then((result) => {

@@ -60,7 +60,7 @@
 <div class = "container">
 
     <div class="my-2 text-left">
-        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/docentes/crear']">
+        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/docentes/form']">
             Crear / Actualizar Docente
         </button>
     </div>
@@ -81,7 +81,8 @@
                 <th>Apellidos</th>
                 <th>Genero</th>
                 <th>Correo</th>
-                <th>eliminar</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -92,6 +93,10 @@
                 <td>{{docente.apellidos}}</td>
                 <td>{{docente.genero}}</td>
                 <td>{{docente.correo}}</td>
+                <td>
+                    <button type="button" name="editar" [routerLink]="['/docentes/form', docente]" 
+                        class="btn btn-primary btn-sm">editar</button>
+                </td>
                 <td>
                     <button type="button" name="eliminar" (click)='delete(docente)' class="btn btn-danger btn-sm">
                         eliminar

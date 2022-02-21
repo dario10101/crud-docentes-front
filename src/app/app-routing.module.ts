@@ -4,8 +4,10 @@ import { DocentesComponent } from './docentes/docentes.component';
 import { FormComponent } from './docentes/form.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/docentes', pathMatch: 'full' },
   { path: 'docentes', component: DocentesComponent },
-  { path: 'docentes/crear', component: FormComponent },
+  { path: 'docentes/form', component: FormComponent },
+  { path: 'docentes/form/:id', component: FormComponent },
 ];
 
 @NgModule({

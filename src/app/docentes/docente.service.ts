@@ -22,7 +22,7 @@ export class DocenteService {
   private http: HttpClient;
   
   
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient) {    
     this.http = http;    
   }
 
@@ -43,6 +43,8 @@ export class DocenteService {
     return this.http.post<Docente>(this.createUrl, docente, { headers: this.httpHeaders }).pipe(
       catchError(e => {            
           if (e.status == 400) {
+            console.log(e.message);
+            swal.fire('Error al crear el docente', 'Por favor verifique que los campos sean  válidos.', 'error');
             return throwError(e);
           }    
           console.log(e.message);
@@ -61,6 +63,8 @@ export class DocenteService {
     return this.http.put<any>(`${this.updateUrl}/${docente.identificacion}`, docente, { headers: this.httpHeaders }).pipe(
       catchError(e => {          
         if (e.status == 400) {
+          console.log(e.message);
+          swal.fire('Error al actualizar el docente', 'Por favor verifique que los campos sean  válidos.', 'error');
           return throwError(e);
         }
         console.error(e.error.mensaje);
