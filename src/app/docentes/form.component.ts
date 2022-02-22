@@ -15,7 +15,8 @@ import swal from 'sweetalert2';
 export class FormComponent implements OnInit {
 
   public docente: Docente = new Docente();
-  public titulo: string = 'Crear / Actualizar Docente';
+  public tituloCrear: string = 'Crear Docente';
+  public tituloActualizar: string = 'Actualizar Docente';
   public errors: string[] = [];
   public mapErrors: Map<string, string> = new Map();
 
@@ -79,7 +80,7 @@ export class FormComponent implements OnInit {
 
         for(let error of this.mapErrors.entries()) {
           console.log(error + "\n");
-          this.errors.push(error.toString());
+          this.errors.push("Campo: " + error[0] + ", Error: " + error[1]);
         }
         
         console.error('Código del error desde el backend: ' + err.status);        
