@@ -16,6 +16,6 @@ export class Docente {
     grupoInvestigacion: string = 'grupo inv 1';
     lineaInvestigacion: string;
     tipoVinculacion: string = 'Planta';
-    escalafon: string;
+    escalafon: string = '1';
     observacion: string; 
 }

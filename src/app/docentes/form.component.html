@@ -27,8 +27,7 @@
                     <div class="mb-3">            
                         <label for="exampleDataList" class="form-label">Tipo Identificación</label>
                         <div class="col-sm-1">
-                            <select name="tipoIdentificacion" id="tipoIdentificacion" class="form-select"
-                                [(ngModel)]="docente.tipoIdentificacion">
+                            <select [(ngModel)]="docente.tipoIdentificacion" name="tipoIdentificacion" id="tipoIdentificacion" class="form-select">
                                 <option [value]="item" *ngFor="let item of listaTipoIdent">{{item}}</option>
                             </select>
                         </div>
@@ -36,16 +35,16 @@
                     
                     <!-- Identificacion -->
                     <div class="mb-3">
-                        <label for="identificacion" class="form-label">Identificacion</label>
+                        <label for="identificacion" class="form-label">Identificacion *</label>
                         <div class="col-sm-6">
                             <input [(ngModel)]="docente.identificacion" #identificacion="ngModel" type="text" class="form-control" id="identificacion" name="identificacion" 
-                                required
+                                required minlength="5" maxlength="15"
                                 [class.is-invalid]="identificacion.invalid && (identificacion.dirty || identificacion.touched)" 
                                 [class.is-valid]="identificacion.valid"
-                                placeholder="validaciones">
+                                placeholder="Requerido, tamaño entre 5 y 15">
                     
                             <div class="form-text text-danger" *ngIf="identificacion.invalid && (identificacion.dirty || identificacion.touched)">
-                                <p>Datos invalidos, verificar:</p>
+                                <p>Datos invalidos, se requiere valor con longitud entre 5 y 15 caracteres</p>
                             </div>
                         </div>
                     </div>
@@ -55,13 +54,13 @@
                         <label for="nombres" class="form-label">Nombres</label>
                         <div class="col-sm-6">
                             <input [(ngModel)]="docente.nombres" #nombres="ngModel" type="text" class="form-control" id="nombres" name="nombres" 
-                                required
+                                required minlength="2" maxlength="100"
                                 [class.is-invalid]="nombres.invalid && (nombres.dirty || nombres.touched)" 
                                 [class.is-valid]="nombres.valid"
-                                placeholder="validaciones">
+                                placeholder="Requerido, tamaño entre 2 y 100">
                     
                             <div class="form-text text-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
-                                <p>Datos invalidos, verificar:</p>
+                                <p>Datos invalidos, se requiere valor con longitud entre 2 y 100 caracteres</p>
                             </div>
                         </div>
                     </div>
@@ -74,10 +73,10 @@
                                 required minlength="5"
                                 [class.is-invalid]="apellidos.invalid && (apellidos.dirty || apellidos.touched)" 
                                 [class.is-valid]="apellidos.valid"
-                                placeholder="validaciones">
+                                placeholder="Requerido, tamaño entre 2 y 100">
                     
                             <div class="form-text text-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
-                                <p>Datos invalidos, verificar:</p>
+                                <p>Datos invalidos, se requiere valor con longitud entre 2 y 100 caracteres</p>
                             </div>
                         </div>
                     </div>
@@ -86,8 +85,7 @@
                     <div class="mb-3">            
                         <label for="genero" class="form-label">Género</label>
                         <div class="col-sm-2">
-                            <select name="genero" id="genero" class="form-select"
-                                [(ngModel)]="docente.genero">
+                            <select name="genero" id="genero" class="form-select" [(ngModel)]="docente.genero">
                                 <option [value]="item" *ngFor="let item of listaGenero">{{item}}</option>
                             </select>
                         </div>
@@ -97,8 +95,15 @@
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Telefono</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.telefono" name="telefono" required>
+                            <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp" [(ngModel)]="docente.telefono" name="telefono" #telefono="ngModel"
+                            required pattern="[3][0-8]{9}"
+                            [class.is-invalid]="telefono.invalid && (telefono.dirty || telefono.touched)" 
+                            [class.is-valid]="telefono.valid"
+                            placeholder="Requerido, valor numérico sin espacios">
+
+                            <div class="form-text text-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+                                <p>Datos invalidos, se requiere valor numérico sin espacios</p>
+                            </div>
                         </div>
                     </div>
         
@@ -106,8 +111,15 @@
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="correo" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.correo" name="correo" required>
+                            <input type="email" class="form-control" id="correo" [(ngModel)]="docente.correo" name="email" #correo="ngModel"
+                            required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                            [class.is-invalid]="correo.invalid && (correo.dirty || correo.touched)" 
+                            [class.is-valid]="correo.valid"
+                            placeholder="example@gmail.com">
+
+                            <div class="form-text text-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+                                <p>Datos invalidos, se requiere un correo electrónico válido</p>
+                            </div>
                         </div>
                     </div>
         
@@ -115,8 +127,15 @@
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Titulo</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="titulo" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.titulo" name="titulo">
+                            <input type="text" class="form-control" id="titulo" [(ngModel)]="docente.titulo" name="titulo" #titulo="ngModel"
+                            required
+                            [class.is-invalid]="titulo.invalid && (titulo.dirty || titulo.touched)" 
+                            [class.is-valid]="titulo.valid"
+                            placeholder="Ejemplo: Ingeniera de Sistemas">
+
+                            <div class="form-text text-danger" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+                                <p>El título del docente es requerido</p>
+                            </div>
                         </div>
                     </div>
         
@@ -135,8 +154,15 @@
                     <div class="mb-3">
                         <label for="universidadTitulo" class="form-label">Universidad Titulo</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="universidadTitulo" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.universidadTitulo" name="universidadTitulo" required>
+                            <input type="text" class="form-control" id="universidadTitulo" [(ngModel)]="docente.universidadTitulo" name="universidadTitulo" #universidadTitulo="ngModel"
+                            required
+                            [class.is-invalid]="universidadTitulo.invalid && (universidadTitulo.dirty || universidadTitulo.touched)" 
+                            [class.is-valid]="universidadTitulo.valid"
+                            placeholder="Ejemplo: Universidad del Cauca">
+
+                            <div class="form-text text-danger" *ngIf="universidadTitulo.invalid && (universidadTitulo.dirty || universidadTitulo.touched)">
+                                <p>La universidad del título del docente es requerida</p>
+                            </div>
                         </div>
                     </div>
         
@@ -144,8 +170,7 @@
                     <div class="mb-3">
                         <label for="categoriaMinciencias" class="form-label">Categoria Minciencias</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="categoriaMinciencias" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.categoriaMinciencias" name="categoriaMinciencias" required>
+                            <input type="text" class="form-control" id="categoriaMinciencias" [(ngModel)]="docente.categoriaMinciencias" name="categoriaMinciencias">                            
                         </div>
                     </div>
         
@@ -154,7 +179,7 @@
                         <label for="linkCvLac" class="form-label">LinkCvLac</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="linkCvLac" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.linkCvLac" name="linkCvLac" required>
+                                [(ngModel)]="docente.linkCvLac" name="linkCvLac">
                         </div>
                     </div>
         
@@ -162,8 +187,14 @@
                     <div class="mb-3">
                         <label for="facultad" class="form-label">Facultad</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="facultad" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.facultad" name="facultad" required>
+                            <input type="text" class="form-control" id="facultad" [(ngModel)]="docente.facultad" name="facultad" #facultad="ngModel"
+                            required
+                            [class.is-invalid]="facultad.invalid && (facultad.dirty || facultad.touched)" 
+                            [class.is-valid]="facultad.valid">
+
+                            <div class="form-text text-danger" *ngIf="facultad.invalid && (facultad.dirty || facultad.touched)">
+                                <p>La facultad del docente es requerida</p>
+                            </div>
                         </div>
                     </div>
         
@@ -171,8 +202,15 @@
                     <div class="mb-3">
                         <label for="deparmamento" class="form-label">Deparmamento</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="deparmamento" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.deparmamento" name="deparmamento" required>
+                            <input type="text" class="form-control" id="deparmamento" [(ngModel)]="docente.deparmamento" name="deparmamento" #deparmamento="ngModel"
+                            required
+                            [class.is-invalid]="deparmamento.invalid && (deparmamento.dirty || deparmamento.touched)" 
+                            [class.is-valid]="deparmamento.valid"
+                            placeholder="Ejemplo: Sistemas">
+
+                            <div class="form-text text-danger" *ngIf="deparmamento.invalid && (deparmamento.dirty || deparmamento.touched)">
+                                <p>El deparmamento del docente es requerido</p>
+                            </div>
                         </div>
                     </div>
         
@@ -188,16 +226,43 @@
                     </div>
         
                     <!-- lineaInvestigacion -->
-                    <div class="mb-3">
-                        <label for="lineaInvestigacion" class="form-label">Linea Investigacion</label>
+                    <br><div class="mb-3">
+                        <label for="lineaInvestigacion" class="form-label">Linea Investigación</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="lineaInvestigacion" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.lineaInvestigacion" name="lineaInvestigacion" required>
+                        
+                            <!-- <input type="text" class="form-control" id="lineaInvestigacion" [(ngModel)]="docente.lineaInvestigacion" name="lineaInvestigacion" required> -->
+                            <div class="container">
+                                <div class="container">
+                                    <p>Ingeniería de Software</p>
+                                    <div class="container">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            <label class="form-check-label" for="inlineCheckbox1">Calidad del proceso y producto</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Ingeniería de procesos</label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <p>Gestión de la información y Tecnologías de la información</p>
+                                    <div class="container">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            <label class="form-check-label" for="inlineCheckbox1">Minería de datos</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Internet de las cosas</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
         
                     <!-- tipoVinculacion -->
-                    <div class="mb-3">            
+                    <br><div class="mb-3">            
                         <label for="tipoVinculacion"  class="form-label">Tipo Vinculación</label>
                         <div class="col-sm-3">
                             <select name="tipoVinculacion" id="tipoVinculacion" class="form-select"
@@ -208,11 +273,12 @@
                     </div>
         
                     <!-- escalafon -->
-                    <div class="mb-3">
-                        <label for="escalafon" class="form-label">Escalafon</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="escalafon" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.escalafon" name="escalafon" required>
+                    <div class="mb-3">            
+                        <label for="escalafon"  class="form-label">Escalafón</label>
+                        <div class="col-sm-3">
+                            <select name="escalafon" id="escalafon" class="form-select" [(ngModel)]="docente.escalafon">
+                                <option [value]="item" *ngFor="let item of listaEscalafon">{{item}}</option>
+                            </select>
                         </div>
                     </div>
         

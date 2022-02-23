@@ -29,6 +29,7 @@ export class FormComponent implements OnInit {
   listaAbreviaturaTitulo: string[] = ["Ing","Doc","Mag"];
   listaGrupoInvestigacion: string[] = ["grupo inv 1", "grupo inv 2", "grupo inv 3"];
   listaTipoVinculacion: string[] = ["Ocasional","Planta","Catedra"];
+  listaEscalafon: string[] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
 
   constructor(private docenteService: DocenteService, private router: Router, private route: ActivatedRoute) { }
 
@@ -107,5 +108,17 @@ export class FormComponent implements OnInit {
     console.log('form.ts: creando docente...');
     this.crearDocente();
   }
+
+
+  
+
+  Data: Array<any> = [
+    { name: 'Pear', value: 'pear' },
+    { name: 'Plum', value: 'plum' },
+    { name: 'Kiwi', value: 'kiwi' },
+    { name: 'Apple', value: 'apple' },
+    { name: 'Lime', value: 'lime' }
+  ];
+  
 
 }
