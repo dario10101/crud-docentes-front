@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Docente } from './docente';
 import { DocenteService } from './docente.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 
 
@@ -20,9 +19,12 @@ export class FormComponent implements OnInit {
   public errors: string[] = [];
   public mapErrors: Map<string, string> = new Map();
 
-  // form: FormGroup;
   createDocente: boolean = true;
-  // isAddMode: boolean;
+  selectedLI:string = '';
+
+  isMasterSel:boolean;
+  categoryList:any;
+  checkedCategoryList:any;
 
   listaTipoIdent: string[] = ["CC","CE","TI", "NIT"];
   listaGenero: string[] = ["Masculino","Femenino","Otro"];
@@ -31,11 +33,30 @@ export class FormComponent implements OnInit {
   listaTipoVinculacion: string[] = ["Ocasional","Planta","Catedra"];
   listaEscalafon: string[] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
 
-  constructor(private docenteService: DocenteService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private docenteService: DocenteService, 
+              private router: Router, 
+              private route: ActivatedRoute,
+              private fb: FormBuilder) { 
+    
+    this.isMasterSel = false;
+    this.categoryList = [
+      {id:1,value:'Calidad de proceso y producto',isSelected:false},          
+      {id:2,value:'Ingenieria de procesos y linea de producto',isSelected:false},          
+      {id:3,value:'Ingenieria de la colaboración y la usabilidad',isSelected:true},         
+    ];
+
+    this.getCheckedItemList();
+  }
 
   ngOnInit(): void {    
     this.createDocente = true; 
     this.docente.identificacion = this.route.snapshot.params['identificacion'];
+
+    // desactivar todos
+    for (var i = 0; i < this.categoryList.length; i++) {
+      console.log(this.categoryList[i].value + '  is selected');
+      this.categoryList[i].isSelected = false;
+    } 
     
     // Para actualizar
     if (this.docente.identificacion !== undefined) {
@@ -59,10 +80,27 @@ export class FormComponent implements OnInit {
       this.docente.tipoVinculacion = this.route.snapshot.params['tipoVinculacion'];
       this.docente.escalafon = this.route.snapshot.params['escalafon'];
       this.docente.observacion = this.route.snapshot.params['observacion'];
-    } 
-
-    console.log('form component onInit: docente: ');
-    console.log(this.docente);
+      
+      // linea de investigacion
+      try {  
+        // obtener valores seleccionados actuales
+        let lineaInvList: string[] = this.docente.lineaInvestigacion.split("|"); 
+        console.log('lista linv: ' + lineaInvList);
+        if (lineaInvList.length > 0) {
+          for (var i = 0; i < this.categoryList.length; i++) {
+            for (var j = 0; j < lineaInvList.length; j++) {
+              if (this.categoryList[i].value == lineaInvList[j]) {
+                console.log(this.categoryList[i].value + '  is selected');
+                this.categoryList[i].isSelected = true;
+              }
+            }
+          }
+        }
+        this.selectedLI = lineaInvList.toString();
+      } catch(e){
+        console.log('error al cargar linea de investigacion: ' + e);
+      }
+    }   
   }
 
   public crearDocente(): void {
@@ -90,6 +128,8 @@ export class FormComponent implements OnInit {
   }
 
   public update():void{
+    this.actualizarLineaInvestigacionDocente();
+
     this.docenteService.update(this.docente).subscribe( docente => {
         this.router.navigate(['/docentes']);
         swal.fire('Docente Actualizado', `Docente <b>${docente.nombres}</p> actualizado con éxito!`, 'success');
@@ -98,27 +138,48 @@ export class FormComponent implements OnInit {
   }
 
   submitCrearDocente() {
-    // if (this.angForm.valid) {
-    //   console.log(this.angForm.value);
-    //   this.crearDocente();
-    // } else {
-    //   alert("Error! Por favor verifique los campos");
-    // }
-    //console.log(this.ngForm);
     console.log('form.ts: creando docente...');
+    console.log(this.categoryList);
+    console.log(this.checkedCategoryList);
+    this.actualizarLineaInvestigacionDocente();
     this.crearDocente();
   }
 
+  actualizarLineaInvestigacionDocente() {
+    this.docente.lineaInvestigacion = '';
+    for (var i = 0; i < this.categoryList.length; i++) {
+      if (this.categoryList[i].isSelected) {
+        this.docente.lineaInvestigacion = this.docente.lineaInvestigacion + this.categoryList[i].value;
+        if (i < this.categoryList.length-1) {
+          this.docente.lineaInvestigacion = this.docente.lineaInvestigacion + "|";
+        }
+      }
+    }
+    console.log('linea investigacion resultante: ' + this.docente.lineaInvestigacion);
+  }  
 
-  
+  checkUncheckAll() {
+    for (var i = 0; i < this.categoryList.length; i++) {
+      this.categoryList[i].isSelected = this.isMasterSel;
+    }
+    this.getCheckedItemList();
+  }   
 
-  Data: Array<any> = [
-    { name: 'Pear', value: 'pear' },
-    { name: 'Plum', value: 'plum' },
-    { name: 'Kiwi', value: 'kiwi' },
-    { name: 'Apple', value: 'apple' },
-    { name: 'Lime', value: 'lime' }
-  ];
+  isAllSelected() {
+    this.isMasterSel = this.categoryList.every(function(item:any) {
+        return item.isSelected == true;
+    })
+    this.getCheckedItemList();
+  }  
+
+  getCheckedItemList(){
+    this.checkedCategoryList = [];
+    for (var i = 0; i < this.categoryList.length; i++) {
+      if(this.categoryList[i].isSelected)
+      this.checkedCategoryList.push(this.categoryList[i]);
+    }
+    this.checkedCategoryList = JSON.stringify(this.checkedCategoryList);
+  }
   
 
 }

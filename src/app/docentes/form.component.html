@@ -25,7 +25,7 @@
                 
                     <!-- Tipo Identificacion -->
                     <div class="mb-3">            
-                        <label for="exampleDataList" class="form-label">Tipo Identificación</label>
+                        <label for="exampleDataList" class="form-label">Tipo Identificación * </label>
                         <div class="col-sm-1">
                             <select [(ngModel)]="docente.tipoIdentificacion" name="tipoIdentificacion" id="tipoIdentificacion" class="form-select">
                                 <option [value]="item" *ngFor="let item of listaTipoIdent">{{item}}</option>
@@ -51,7 +51,7 @@
         
                     <!-- Nombres -->
                     <div class="mb-3">
-                        <label for="nombres" class="form-label">Nombres</label>
+                        <label for="nombres" class="form-label">Nombres *</label>
                         <div class="col-sm-6">
                             <input [(ngModel)]="docente.nombres" #nombres="ngModel" type="text" class="form-control" id="nombres" name="nombres" 
                                 required minlength="2" maxlength="100"
@@ -67,7 +67,7 @@
         
                     <!-- Apellidos -->
                     <div class="mb-3">
-                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <label for="apellidos" class="form-label">Apellidos *</label>
                         <div class="col-sm-6">
                             <input [(ngModel)]="docente.apellidos" #apellidos="ngModel" type="text" class="form-control" id="apellidos" name="apellidos" 
                                 required minlength="5"
@@ -80,23 +80,34 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- genero -->
-                    <div class="mb-3">            
-                        <label for="genero" class="form-label">Género</label>
-                        <div class="col-sm-2">
-                            <select name="genero" id="genero" class="form-select" [(ngModel)]="docente.genero">
-                                <option [value]="item" *ngFor="let item of listaGenero">{{item}}</option>
-                            </select>
+                    <div>
+                        <label for="genero" class="col-form-label col-sm-2">Genero</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Masculino"
+                                [(ngModel)]="docente.genero">
+                            <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Femenino"
+                                [(ngModel)]="docente.genero">
+                            <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Otro"
+                                [(ngModel)]="docente.genero">
+                            <label class="form-check-label" for="inlineRadio3">Otro</label>
                         </div>
                     </div>
+                    <br>
         
                     <!-- telefono -->
                     <div class="mb-3">
-                        <label for="telefono" class="form-label">Telefono</label>
+                        <label for="telefono" class="form-label">Telefono *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp" [(ngModel)]="docente.telefono" name="telefono" #telefono="ngModel"
-                            required pattern="[3][0-8]{9}"
+                            required pattern="[3][0-9]{9}"
                             [class.is-invalid]="telefono.invalid && (telefono.dirty || telefono.touched)" 
                             [class.is-valid]="telefono.valid"
                             placeholder="Requerido, valor numérico sin espacios">
@@ -109,7 +120,7 @@
         
                     <!-- correo -->
                     <div class="mb-3">
-                        <label for="correo" class="form-label">Correo</label>
+                        <label for="correo" class="form-label">Correo *</label>
                         <div class="col-sm-6">
                             <input type="email" class="form-control" id="correo" [(ngModel)]="docente.correo" name="email" #correo="ngModel"
                             required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
@@ -125,7 +136,7 @@
         
                     <!-- titulo -->
                     <div class="mb-3">
-                        <label for="titulo" class="form-label">Titulo</label>
+                        <label for="titulo" class="form-label">Titulo *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="titulo" [(ngModel)]="docente.titulo" name="titulo" #titulo="ngModel"
                             required
@@ -141,7 +152,7 @@
         
                     <!-- abreviaturaTitulo -->
                     <div class="mb-3">            
-                        <label for="abreviaturaTitulo" class="form-label">Abreviatura Titulo</label>
+                        <label for="abreviaturaTitulo" class="form-label">Abreviatura Titulo *</label>
                         <div class="col-sm-1">
                             <select name="abreviaturaTitulo" id="abreviaturaTitulo" class="form-select"
                                 [(ngModel)]="docente.abreviaturaTitulo">
@@ -152,7 +163,7 @@
         
                     <!-- universidadTitulo -->
                     <div class="mb-3">
-                        <label for="universidadTitulo" class="form-label">Universidad Titulo</label>
+                        <label for="universidadTitulo" class="form-label">Universidad Titulo *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="universidadTitulo" [(ngModel)]="docente.universidadTitulo" name="universidadTitulo" #universidadTitulo="ngModel"
                             required
@@ -185,12 +196,13 @@
         
                     <!-- facultad -->
                     <div class="mb-3">
-                        <label for="facultad" class="form-label">Facultad</label>
+                        <label for="facultad" class="form-label">Facultad *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="facultad" [(ngModel)]="docente.facultad" name="facultad" #facultad="ngModel"
                             required
                             [class.is-invalid]="facultad.invalid && (facultad.dirty || facultad.touched)" 
-                            [class.is-valid]="facultad.valid">
+                            [class.is-valid]="facultad.valid"
+                            placeholder="requerido">
 
                             <div class="form-text text-danger" *ngIf="facultad.invalid && (facultad.dirty || facultad.touched)">
                                 <p>La facultad del docente es requerida</p>
@@ -200,7 +212,7 @@
         
                     <!-- deparmamento -->
                     <div class="mb-3">
-                        <label for="deparmamento" class="form-label">Deparmamento</label>
+                        <label for="deparmamento" class="form-label">Deparmamento *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="deparmamento" [(ngModel)]="docente.deparmamento" name="deparmamento" #deparmamento="ngModel"
                             required
@@ -228,42 +240,49 @@
                     <!-- lineaInvestigacion -->
                     <br><div class="mb-3">
                         <label for="lineaInvestigacion" class="form-label">Linea Investigación</label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                         
                             <!-- <input type="text" class="form-control" id="lineaInvestigacion" [(ngModel)]="docente.lineaInvestigacion" name="lineaInvestigacion" required> -->
                             <div class="container">
                                 <div class="container">
                                     <p>Ingeniería de Software</p>
                                     <div class="container">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                            <label class="form-check-label" for="inlineCheckbox1">Calidad del proceso y producto</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                            <label class="form-check-label" for="inlineCheckbox2">Ingeniería de procesos</label>
+
+                                        <div class="form-check form-check-inline" *ngFor="let item of categoryList">
+                                            <div *ngIf="!item.isSelected">
+                                                <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}"
+                                                    (change)="isAllSelected()" />
+                                                {{item.value}}
+                                            </div>
+                                            <div *ngIf="item.isSelected">
+                                                <input type="checkbox" checked value="{{item.id}}" (change)="isAllSelected()" />
+                                                {{item.value}}
+                                            </div>
                                         </div>
                                     </div>
                                     <br>
+
+                                    <!-- quitar datos quemadoss -->
                                     <p>Gestión de la información y Tecnologías de la información</p>
                                     <div class="container">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                            <label class="form-check-label" for="inlineCheckbox1">Minería de datos</label>
+                                            <input class="checkbox" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            Minería de datos
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                            <label class="form-check-label" for="inlineCheckbox2">Internet de las cosas</label>
+                                            <input class="checkbox" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            Internet de las cosas
                                         </div>
                                     </div>
                                 </div>
+                            </div>                            
+                            
                             </div>
                         </div>
-                    </div>
         
                     <!-- tipoVinculacion -->
                     <br><div class="mb-3">            
-                        <label for="tipoVinculacion"  class="form-label">Tipo Vinculación</label>
+                        <label for="tipoVinculacion"  class="form-label">Tipo Vinculación *</label>
                         <div class="col-sm-3">
                             <select name="tipoVinculacion" id="tipoVinculacion" class="form-select"
                                 [(ngModel)]="docente.tipoVinculacion">
@@ -274,7 +293,7 @@
         
                     <!-- escalafon -->
                     <div class="mb-3">            
-                        <label for="escalafon"  class="form-label">Escalafón</label>
+                        <label for="escalafon"  class="form-label">Escalafón *</label>
                         <div class="col-sm-3">
                             <select name="escalafon" id="escalafon" class="form-select" [(ngModel)]="docente.escalafon">
                                 <option [value]="item" *ngFor="let item of listaEscalafon">{{item}}</option>
@@ -284,10 +303,14 @@
         
                     <!-- observacion -->
                     <div class="mb-3">
-                        <label for="observacion" class="form-label">Observacion</label>
+                        <label for="observacion" class="form-label">Observación</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="observacion" aria-describedby="emailHelp"
-                                [(ngModel)]="docente.observacion" name="observacion" required>
+                            <textarea class="form-control" placeholder="Observación adicional, opcional" id="floatingTextarea2"
+                                style="height: 100px" [(ngModel)]="docente.observacion" name="observacion"></textarea>
+                        
+                            <!-- <input type="textarea" class="form-control" id="observacion" aria-describedby="emailHelp"
+                                [(ngModel)]="docente.observacion" name="observacion"> -->
+
                         </div>
                     </div> 
 
